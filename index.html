@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis 6 Prinsip UI Design - WeTV & Viu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            margin-bottom: 40px;
+            border-radius: 25px;
+            position: relative;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            animation-delay: 0.1s;
+        }
+
+        .slide-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            animation-delay: 0.2s;
+        }
+
+        .slide-3 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            animation-delay: 0.3s;
+        }
+
+        .slide-4 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            animation-delay: 0.4s;
+        }
+
+        .slide-5 {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            animation-delay: 0.5s;
+        }
+
+        .slide-6 {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+            animation-delay: 0.6s;
+        }
+
+        .slide-7 {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #333;
+            animation-delay: 0.7s;
+        }
+
+        .slide-8 {
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            animation-delay: 0.8s;
+        }
+
+        .slide-9 {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #333;
+            animation-delay: 0.9s;
+        }
+
+        .slide-10 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            animation-delay: 1s;
+        }
+
+        .slide-11 {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            animation-delay: 1.1s;
+        }
+
+        h1 {
+            font-size: 3.8rem;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 35px;
+            text-align: center;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 600;
+        }
+
+        .slide-6 h2, .slide-7 h2, .slide-9 h2 {
+            color: #333;
+        }
+
+        h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #ffeb3b;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            font-weight: 600;
+        }
+
+        .slide-6 h3, .slide-7 h3, .slide-9 h3 {
+            color: #e91e63;
+        }
+
+        h4 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 50px;
+            text-align: center;
+            font-weight: 300;
+        }
+
+        .team-info {
+            background: rgba(255,255,255,0.15);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,255,255,0.2);
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .team-member {
+            font-size: 1.3rem;
+            margin: 15px 0;
+            padding: 10px 0;
+            font-weight: 500;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+            width: 100%;
+        }
+
+        .principle-card {
+            background: rgba(255,255,255,0.2);
+            padding: 35px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.4s ease;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .principle-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .principle-card h3 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .principle-card p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .app-analysis {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin: 40px 0;
+            width: 100%;
+        }
+
+        .app-section {
+            background: rgba(255,255,255,0.15);
+            padding: 35px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .viu-section {
+            border-left: 6px solid #20b2aa;
+            box-shadow: -6px 0 20px rgba(32, 178, 170, 0.3);
+        }
+
+        .wetv-section {
+            border-left: 6px solid #ff6b35;
+            box-shadow: -6px 0 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            font-size: 1.2rem;
+            font-weight: 400;
+            transition: padding-left 0.3s ease;
+        }
+
+        .feature-list li:hover {
+            padding-left: 15px;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            color: #4caf50;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.3rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            font-size: 1.1rem;
+        }
+
+        .comparison-table th {
+            background: rgba(0,0,0,0.4);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .pros, .cons {
+            background: rgba(255,255,255,0.15);
+            padding: 35px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .pros {
+            border-left: 6px solid #4caf50;
+            box-shadow: -6px 0 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .cons {
+            border-left: 6px solid #f44336;
+            box-shadow: -6px 0 20px rgba(244, 67, 54, 0.3);
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.25);
+            border: none;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .background-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            text-align: justify;
+            margin: 20px 0;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .app-analysis {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .pros-cons {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            .slide {
+                padding: 40px 20px;
+            }
+        }
+
+        .slide:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+
+        .slide:nth-child(odd) {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Judul -->
+        <div class="slide slide-1">
+            <h1>Analisis 6 Prinsip User Interface Design</h1>
+            <div class="subtitle">Aplikasi Streaming WeTV dan Viu</div>
+            <div class="team-info">   
+        <div style="display: flex; justify-content: center; gap: 60px; margin: 40px 0;">
+    <div style="text-align: center;">
+        <img src="https://i.imgur.com/sexNOWQ.jpeg" 
+             alt="WeTV Logo" 
+             style="width: 120px; height: 120px; border-radius: 20px; margin-bottom: 15px;">
+        <h3>WeTV</h3>
+    </div>
+    <div style="text-align: center;">
+        <img src="https://i.imgur.com/imrxiIH.jpeg" 
+             alt="Viu Logo" 
+             style="width: 120px; height: 120px; border-radius: 20px; margin-bottom: 15px;">
+        <h3>Viu</h3>
+    </div>
+</div>
+                <h3>Kelompok Penyusun</h3>
+                <div class="team-member"><strong>Lulu Luvita Al Sogiri</strong> (24072124023)</div>
+                <div class="team-member"><strong>Agitsa Mutsla Nazihah</strong> (24072124013)</div>
+                <div class="team-member"><strong>Nabila Putri Sofia</strong> (24072124018)</div>
+                <div style="margin-top: 25px; font-size: 1.2rem; font-style: italic;">
+                    📱 Mata Kuliah: Analisis dan Perancangan Sistem
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Latar Belakang -->
+        <div class="slide slide-2">
+            <h2>Latar Belakang</h2>
+            <div class="app-section">
+                <div class="background-text">
+                    Aplikasi streaming video seperti <strong>WeTV</strong> dan <strong>Viu</strong> telah menjadi platform hiburan populer di Indonesia. Kedua aplikasi ini menawarkan konten drama Asia yang beragam dengan interface yang berbeda.
+                </div>
+                <div class="background-text">
+                    Analisis terhadap prinsip-prinsip User Interface Design pada kedua aplikasi ini penting untuk memahami bagaimana desain interface mempengaruhi pengalaman pengguna dalam mengakses dan menikmati konten hiburan.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: 6 Prinsip UI Design -->
+        <div class="slide slide-3">
+            <!-- 3. DUA FOTO BERDAMPINGAN (PERBANDINGAN) -->
+<div class="comparison-photos">
+    <div style="display: flex; justify-content: center; gap: 40px; margin: 30px 0;">
+    <img src="https://i.imgur.com/sgCoibZ.jpeg" 
+         alt="WeTV Interface" 
+         style="width: 300px; height: 500px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+    <img src="https://i.imgur.com/UBIXyS7.jpeg" 
+         alt="Viu Interface" 
+         style="width: 300px; height: 500px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+    </div>
+</div>
+
+<style>
+    .comparison-photos {
+        display: none;
+    }
+    .slide-3 .comparison-photos,
+    .slide-8 .comparison-photos {
+        display: block;
+    }
+</style>
+            <h2>6 Prinsip User Interface Design</h2>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <h3>1. Layout</h3>
+                    <p>Arrangement of Objects on Screen</p>
+                </div>
+                <div class="principle-card">
+                    <h3>2. Content Awareness</h3>
+                    <p>Feedback to User</p>
+                </div>
+                <div class="principle-card">
+                    <h3>3. Aesthetics</h3>
+                    <p>Pleasing to Eye</p>
+                </div>
+                <div class="principle-card">
+                    <h3>4. User Experience</h3>
+                    <p>Works with Expert and Novice Users</p>
+                </div>
+                <div class="principle-card">
+                    <h3>5. Consistency</h3>
+                    <p>Uniformity</p>
+                </div>
+                <div class="principle-card">
+                    <h3>6. Minimal User Effort</h3>
+                    <p>Ease of Use</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 4: Analisis Viu - Layout & Content Awareness -->
+        <div class="slide slide-4">
+            <h2>Analisis Interface Viu</h2>
+            <div class="app-analysis">
+                <div class="app-section viu-section">
+                    <h3>Layout</h3>
+                    <ul class="feature-list">
+                        <li>Struktur hierarkis yang jelas dengan konten utama di bagian atas</li>
+                        <li>Grid system terorganisir untuk menampilkan berbagai drama</li>
+                        <li>Navigation bar sederhana di bagian atas (Inbox, Cari, Kategori)</li>
+                        <li>Pembagian konten berdasarkan kategori yang sistematis</li>
+                    </ul>
+                </div>
+                <div class="app-section viu-section">
+                    <h3>Content Awareness</h3>
+                    <ul class="feature-list">
+                        <li>Episode indicator yang jelas (Episode 1)</li>
+                        <li>Jadwal tayang yang informatif</li>
+                        <li>Label kategori yang membantu pengguna</li>
+                        <li>Status "Baru Rilis" memberikan feedback konten terbaru</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 2. FOTO DENGAN STYLING LENGKAP -->
+<img src="https://i.imgur.com/f8Tvcgm.jpeg" alt="Viu Home" 
+     alt="Viu Interface" 
+     style="width: 300px; height: 500px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);display: block; margin: 0 auto;">
+        </div>
+
+        <!-- Slide 5: Analisis Viu - Aesthetics & User Experience -->
+        <div class="slide slide-5">
+            <h2>Analisis Interface Viu</h2>
+            <div class="app-analysis">
+                <div class="app-section viu-section">
+                    <h3>Aesthetics</h3>
+                    <ul class="feature-list">
+                        <li>Warna dominan teal/hijau kebiruan yang eye-catching</li>
+                        <li>Typography yang bold dan mudah dibaca</li>
+                        <li>Gradient background yang memberikan depth</li>
+                        <li>Thumbnail berkualitas tinggi dengan branding konsisten</li>
+                    </ul>
+                </div>
+                <div class="app-section viu-section">
+                    <h3>User Experience</h3>
+                    <ul class="feature-list">
+                        <li>Search functionality mudah diakses di header</li>
+                        <li>Kategorisasi konten membantu navigasi</li>
+                        <li>Visual hierarchy yang jelas untuk semua users</li>
+                        <li>Top 10 section memberikan rekomendasi populer</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Slide 6: Analisis WeTV - Layout & Content Awareness -->
+        <div class="slide slide-6">
+            <h2>Analisis Interface WeTV</h2>
+            <div class="app-analysis">
+                <div class="app-section wetv-section">
+                    <h3>Layout</h3>
+                    <ul class="feature-list">
+                        <li>Hero section dengan featured content yang dominan</li>
+                        <li>Horizontal scrolling untuk kategori "WeTV Hot"</li>
+                        <li>Bottom navigation dengan Home, Explore, Me</li>
+                        <li>Search bar prominent di bagian atas</li>
+                        <li>Tab navigation untuk kategori konten</li>
+                    </ul>
+                </div>
+                <div class="app-section wetv-section">
+                    <h3>Content Awareness</h3>
+                    <ul class="feature-list">
+                        <li>"Nonton Gratis paling FANTASTIS" memberikan info pricing</li>
+                        <li>VIP badges yang jelas pada konten premium</li>
+                        <li>Progress indicators pada carousel</li>
+                        <li>"Favorite gamer couple" memberikan context konten</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 2. FOTO DENGAN STYLING LENGKAP -->
+<img src="https://i.imgur.com/3qj9iLl.jpeg" alt="WeTV Home" 
+     alt="WeTV Interface" 
+     style="width: 300px; height: 500px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);display: block; margin: 0 auto;">
+        </div>
+
+        <!-- Slide 7: Analisis WeTV - Aesthetics & User Experience -->
+        <div class="slide slide-7">
+            <h2>Analisis Interface WeTV</h2>
+            <div class="app-analysis">
+                <div class="app-section wetv-section">
+                    <h3>Aesthetics</h3>
+                    <ul class="feature-list">
+                        <li>Dark theme dengan accent colors yang vibrant</li>
+                        <li>Modern typography dengan mix font weights</li>
+                        <li>High-quality promotional images</li>
+                        <li>Gradient overlays pada thumbnails untuk readability</li>
+                        <li>Consistent branding dengan logo WeTV</li>
+                    </ul>
+                </div>
+                <div class="app-section wetv-section">
+                    <h3>User Experience</h3>
+                    <ul class="feature-list">
+                        <li>Multiple entry points untuk berbagai tipe pengguna</li>
+                        <li>Clear content categorization</li>
+                        <li>VIP membership clearly differentiated</li>
+                        <li>Intuitive navigation structure</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Perbandingan Consistency & Minimal User Effort -->
+        <div class="slide slide-8">
+            <!-- 3. DUA FOTO BERDAMPINGAN (PERBANDINGAN) -->
+<div class="comparison-photos">
+    <div style="display: flex; justify-content: center; gap: 40px; margin: 30px 0;">
+    <img src="https://i.imgur.com/sgCoibZ.jpeg" 
+         alt="WeTV Interface" 
+         style="width: 300px; height: 500px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+    <img src="https://i.imgur.com/UBIXyS7.jpeg" 
+         alt="Viu Interface" 
+         style="width: 300px; height: 500px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+    </div>
+</div>
+
+<style>
+    .comparison-photos {
+        display: none;
+    }
+    .slide-3 .comparison-photos,
+    .slide-8 .comparison-photos {
+        display: block;
+    }
+</style>
+            <h2>Perbandingan: Consistency & Minimal User Effort</h2>
+            <div class="app-analysis">
+                <div class="app-section viu-section">
+                    <h3>Viu - Consistency</h3>
+                    <ul class="feature-list">
+                        <li>Consistent color scheme (teal/orange) di seluruh interface</li>
+                        <li>Uniform thumbnail sizes dan aspect ratios</li>
+                        <li>Consistent typography hierarchy</li>
+                        <li>Standardized episode labeling</li>
+                    </ul>
+                    <h3>Viu - Minimal User Effort</h3>
+                    <ul class="feature-list">
+                        <li>Quick access ke kategori populer</li>
+                        <li>Clear episode information mengurangi confusion</li>
+                        <li>Simple navigation dengan minimal clicks</li>
+                        <li>Direct content access dari homepage</li>
+                    </ul>
+                </div>
+                <div class="app-section wetv-section">
+                    <h3>WeTV - Consistency</h3>
+                    <ul class="feature-list">
+                        <li>Consistent dark theme dengan accent colors</li>
+                        <li>Uniform VIP badge placement</li>
+                        <li>Consistent navigation patterns</li>
+                        <li>Standardized content cards</li>
+                    </ul>
+                    <h3>WeTV - Minimal User Effort</h3>
+                    <ul class="feature-list">
+                        <li>Prominent search functionality</li>
+                        <li>Free content clearly marked</li>
+                        <li>Multiple discovery methods</li>
+                        <li>Streamlined VIP upgrade process</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Kelebihan dan Kekurangan -->
+        <div class="slide slide-9">
+            <h2>Kelebihan dan Kekurangan</h2>
+            <div class="app-analysis">
+                <div class="app-section viu-section">
+                    <h3>Viu</h3>
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>Kelebihan:</h4>
+                            <ul class="feature-list">
+                                <li>Layout yang clean dan organized</li>
+                                <li>Content awareness yang excellent</li>
+                                <li>Consistent branding</li>
+                                <li>User-friendly untuk semua tingkat user</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>Kekurangan:</h4>
+                            <ul class="feature-list">
+                                <li>Limited visual hierarchy pada section bawah</li>
+                                <li>Kurang prominent search function</li>
+                                <li>Aesthetic appeal bisa ditingkatkan</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-section wetv-section">
+                    <h3>WeTV</h3>
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>Kelebihan:</h4>
+                            <ul class="feature-list">
+                                <li>Modern aesthetic appeal</li>
+                                <li>Excellent content discovery</li>
+                                <li>Clear premium/free differentiation</li>
+                                <li>Rich visual experience</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>Kekurangan:</h4>
+                            <ul class="feature-list">
+                                <li>Potentially overwhelming untuk new users</li>
+                                <li>Dark theme mungkin tidak cocok untuk semua</li>
+                                <li>Terlalu banyak informasi di satu layar</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Kesimpulan -->
+        <div class="slide slide-10">
+            <h2>Kesimpulan</h2>
+            <div class="app-section">
+                <h3>Analisis Keseluruhan</h3>
+                <div class="background-text">
+                    Kedua aplikasi streaming ini menerapkan 6 prinsip User Interface Design dengan pendekatan yang berbeda namun efektif:
+                </div>
+                <div class="comparison-table">
+                    <table style="width: 100%;">
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Viu</th>
+                            <th>WeTV</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Keunggulan Utama</strong></td>
+                            <td>Simplicity & Content Awareness</td>
+                            <td>Aesthetics & User Experience</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Target User</strong></td>
+                            <td>Pengguna yang mengutamakan kemudahan navigasi</td>
+                            <td>Pengguna yang menginginkan pengalaman visual rich</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pendekatan Design</strong></td>
+                            <td>Clean, organized, minimalistic</td>
+                            <td>Modern, sophisticated, feature-rich</td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="margin-top: 30px;">
+                    <h3>Rekomendasi</h3>
+                    <ul class="feature-list">
+                        <li><strong>Viu:</strong> Dapat meningkatkan visual appeal dan prominence search function</li>
+                        <li><strong>WeTV:</strong> Dapat menyederhanakan interface untuk meningkatkan accessibility</li>
+                        <li>Kedua aplikasi sudah menerapkan prinsip consistency dan minimal user effort dengan baik</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Terima Kasih -->
+        <div class="slide slide-11">
+            <h1>Terima Kasih</h1>
+            <div class="subtitle">Pertanyaan dan Diskusi</div>
+            <div class="team-info">
+                <h3>Kelompok:</h3>
+                <div class="team-member">Lulu Luvita Al Sogiri (24072124023)</div>
+                <div class="team-member">Agitsa Mutsla Nazihah (24072124013)</div>
+                <div class="team-member">Nabila Putri Sofia (24072124018)</div>
+                <div style="margin-top: 30px; font-size: 1.2rem; opacity: 0.9;">
+                    📱 Analisis dan Perancangan Sistem
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <div class="navigation">
+    <button class="nav-btn" onclick="prevSlide()">⬅ Sebelumnya</button>
+    <button class="nav-btn" onclick="printPresentation()">🖨 Print</button>
+    <button class="nav-btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+    <button class="nav-btn" onclick="nextSlide()">➡ Berikutnya</button>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".slide");
+
+    function updateSlide() {
+        slides.forEach((slide, index) => {
+            slide.style.display = index === currentSlide? "block": "none";
+});
+}
+
+    function nextSlide() {
+        if (currentSlide < slides.length - 1) {
+            currentSlide++;
+            updateSlide();
+            showFeedback("Slide berikutnya");
+} else {
+            showFeedback("Ini adalah slide terakhir!");
+}
+}
+
+    function prevSlide() {
+        if (currentSlide> 0) {
+            currentSlide--;
+            updateSlide();
+            showFeedback("Slide sebelumnya");
+} else {
+            showFeedback("Ini adalah slide pertama!");
+}
+}
+
+    function printPresentation() {
+        window.print();
+        showFeedback("Mencetak presentasi...");
+}
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+                alert("Mode layar penuh tidak didukung di browser ini!");
+});
+} else {
+            document.exitFullscreen();
+}
+        showFeedback("Mengaktifkan/mematikan fullscreen");
+}
+
+    function showFeedback(message) {
+        let feedback = document.createElement("div");
+        feedback.innerText = message;
+        feedback.style.position = "fixed";
+        feedback.style.bottom = "50px";
+        feedback.style.left = "20px";  // Pindah ke kiri
+        feedback.style.padding = "10px";
+        feedback.style.background = "black";
+        feedback.style.color = "white";
+        feedback.style.borderRadius = "5px";
+        feedback.style.opacity = "0.8";
+        document.body.appendChild(feedback);
+
+        setTimeout(() => {
+            feedback.remove();
+}, 2000);
+}
+
+    updateSlide(); // Memastikan slide pertama muncul saat halaman dimuat
+</script>
